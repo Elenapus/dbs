@@ -1,0 +1,44 @@
+CREATE TABLE Student(
+    matrnr integer,
+    vorname varchar (30),
+    nachname varchar (30),
+    geb_datum date,
+PRIMARY KEY (matrnr)
+);
+
+CREATE TABLE Studienrichtung(
+    kennzahl integer,
+    r_name varchar (30),
+    abschnitt varchar (30),
+    sum_ects integer,
+PRIMARY KEY (kennzahl)
+);
+
+CREATE TABLE Lehrveranstaltung (
+    lvnr integer,
+    titel varchar (30),
+    typ varchar (30),
+    stunden integer,
+    ects integer,
+PRIMARY KEY (lvnr)
+);
+
+CREATE TABLE teilgenommen (
+    matrnr integer,
+    lvnr integer,    
+    semester varchar(30),
+    note integer,
+PRIMARY KEY (matrnr, lvnr, semester),
+FOREIGN KEY (matrnr) REFERENCES Student,
+FOREIGN KEY (lvnr) REFERENCES Lehrveranstaltung
+);
+
+CREATE TABLE studiert (
+    matrnr integer,
+    kennzahl integer,    
+    seit date,
+PRIMARY KEY (matrnr, kennzahl, seit),
+FOREIGN KEY (matrnr) REFERENCES Student,
+FOREIGN KEY (kennzahl) REFERENCES Studienrichtung
+);
+
